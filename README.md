@@ -1,13 +1,36 @@
-steps
+#Setup for the Adafruit Huzzah
 -------------
 
-Click the DOWNLOADS button in the top right corner, rename the uncompressed folder Spacebrew. Check that the Spacebrew folder contains Spacebrew.cpp and Spacebrew.h
+1. Make sure you follow the [Adafruit setup guide](https://learn.adafruit.com/adafruit-feather-huzzah-esp8266/using-arduino-ide)
+2. Download or clone this library into your <arduinosketchfolder>/libraries/ folder
+    * First, if you don't have a 'libraries' folder, create it!
+    * Download: 
+        * Click the DOWNLOADS above, and download a zip of this repo 
+        * Move the whole folder into <arduinosketchfolder>/libraries/
+        * Rename the folder to "Spacebrew"
+    * Clone:
+        ```
+        $cd <arduinosketchfolder>/libraries/
+        $git clone https://github.com/mattfelsen/spacebrew-esp8266.git Spacebrew
+        ```
 
-Place the Spacebrew library folder your <arduinosketchfolder>/libraries/ folder. You may need to create the libraries subfolder if its your first library. 
+3. Download dependencies:
+    * https://github.com/Links2004/arduinoWebSockets
+    * https://github.com/me-no-dev/ESPAsyncTCP
 
-Also download and install the WebSocketClient library from https://github.com/labatrockwell/ArduinoWebsocketClient
+4. Edit the Websockets library to turn on 'async' mode
+    * Open ```Websockets.h``` in arduinoWebSockets/src
+    * Comment out line 57, and uncomment line 58. It should look like this:
+    ```
+    #if defined(ESP8266) || defined(ESP31B)
+    //#define WEBSOCKETS_NETWORK_TYPE NETWORK_ESP8266
+    #define WEBSOCKETS_NETWORK_TYPE NETWORK_ESP8266_ASYNC
+    #else
+    #define WEBSOCKETS_NETWORK_TYPE NETWORK_W5100
+    #endif
+    ```
 
-Restart the IDE.
+5. Restart the Arduino IDE, if you had it running!
 
 includes
 --------------
